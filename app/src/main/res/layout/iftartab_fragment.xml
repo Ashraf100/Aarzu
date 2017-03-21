@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/iftar_relative"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/img_iftartab"
+        android:id="@+id/imageView2" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/iftard_card_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView2" />
+
+    <TextClock
+        android:id="@+id/textClock2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="58dp"
+        android:layout_above="@+id/iftard_card_recycler_view"
+        android:layout_alignEnd="@+id/imageView2" />
+    <!-- <android.support.design.widget.FloatingActionButton
+         android:id="@+id/fab"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom"
+         app:srcCompat="@android:drawable/ic_menu_share"
+         android:layout_marginLeft="@dimen/fab_margin"
+         android:layout_marginRight="@dimen/fab_margin"
+         android:layout_marginTop="569dp"
+         android:layout_marginStart="367dp"
+         android:layout_alignParentTop="true"
+         android:layout_alignParentStart="true" />-->
+   <!-- <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:text="Iftar Du'a"
+        android:textSize="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:textStyle="bold"
+        android:id="@+id/dua"
+        android:layout_above="@+id/tv_dua"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="اللَّهُمَّ اِنِّى لَكَ صُمْتُ وَبِكَ امنْتُ [وَعَلَيْكَ تَوَكَّلْتُ] وَعَلَى رِزْقِكَ اَفْطَرْتُ "
+        android:id="@+id/tv_dua"
+        android:layout_above="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Transliteration:"
+       android:textStyle="bold"
+       android:layout_marginLeft="8dp"
+       android:id="@+id/textView2"
+       android:layout_above="@+id/eng_dua"
+       android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Allahumma Inni laka sumtu wa bika amantu [wa alayka tawakkalto] wa ‘ala rizqika aftartu"
+        android:gravity="bottom"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+
+        android:id="@+id/eng_dua"
+        android:layout_above="@+id/textView6"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meaning:"
+        android:textStyle="bold"
+        android:layout_marginLeft="8dp"
+        android:layout_above="@+id/mng_dua"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/textView6" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="O Allah! I fasted for You and I believe in You [and I put my trust in You] and I break my fast with Your sustenance.
+[“wa ‘alayka tawakkaltu” is quoted in some books of knowledge – but not all, hence it is in brackets]
+[Abu Dawud]"
+        android:gravity="bottom"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/mng_dua"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />-->
+</RelativeLayout>

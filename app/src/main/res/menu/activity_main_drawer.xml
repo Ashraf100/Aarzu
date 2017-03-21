@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_ramzan"
+            android:icon="@drawable/ram_icon"
+            android:title="Ramzan" />
+
+        <item
+            android:id="@+id/nav_event"
+            android:icon="@drawable/upevent_icon"
+            android:title="Upcoming Event" />
+
+        <item
+            android:id="@+id/nav_compass"
+            android:icon="@drawable/img_nav_compass"
+            android:title="Compass" />
+        <!--  <item
+              android:id="@+id/nav_tshirt"
+              android:icon="@drawable/calendar_clock"
+              android:title="Tshirt" />-->
+    </group>
+
+    <item android:title="Waqt - Upcoming Feature ">
+        <menu>
+
+            <item
+                android:id="@+id/nav_namaz"
+                android:icon="@drawable/nam_icon"
+                android:title="Namaz Times" />
+
+            <item
+                android:id="@+id/nav_mosque"
+                android:icon="@drawable/mos_icon"
+                android:title="Mosque list" />
+            <item
+                android:id="@+id/nav_calender"
+                android:icon="@drawable/calendar"
+                android:title="Calender" />
+
+
+
+            <!--
+
+                        <item
+                            android:id="@+id/nav_send"
+                            android:icon="@drawable/ic_menu_send"
+                            android:title="Send Alerts" />
+
+
+            -->
+
+
+        </menu>
+    </item>
+
+</menu>
