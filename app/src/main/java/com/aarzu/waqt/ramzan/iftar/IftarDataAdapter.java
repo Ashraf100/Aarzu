@@ -1,5 +1,6 @@
 package com.aarzu.waqt.ramzan.iftar;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.aarzu.waqt.R;
 import com.aarzu.waqt.model.AllTask;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -47,7 +49,22 @@ public class IftarDataAdapter extends RecyclerView.Adapter<IftarDataAdapter.View
         viewHolder.iftar_day.setText(iftar.get(i).getDay());
         viewHolder.iftar_date.setText(iftar.get(i).getIdate());
         viewHolder.iftar_time.setText(iftar.get(i).getItime());
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 
+
+        if ((iftar.get(i).getIdate().equals(df))) {
+            viewHolder.iftar_day.setText(iftar.get(i).getDay());
+            viewHolder.iftar_sn.setText(iftar.get(i).getSn());
+            viewHolder.iftar_date.setText(iftar.get(i).getIdate());
+            viewHolder.iftar_time.setText(iftar.get(i).getItime());
+            viewHolder.iftar_day.setBackgroundColor(Color.parseColor("#FF150184"));
+        }
+        else{
+            viewHolder.iftar_sn.setText(iftar.get(i).getSn());
+            viewHolder.iftar_day.setText(iftar.get(i).getDay());
+            viewHolder.iftar_date.setText(iftar.get(i).getIdate());
+            viewHolder.iftar_time.setText(iftar.get(i).getItime());
+        }
     }
 
     @Override

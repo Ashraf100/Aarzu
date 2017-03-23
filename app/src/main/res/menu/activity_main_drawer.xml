@@ -13,18 +13,18 @@
             android:icon="@drawable/upevent_icon"
             android:title="Upcoming Event" />
 
-        <item
+      <!--  <item
             android:id="@+id/nav_compass"
             android:icon="@drawable/img_nav_compass"
-            android:title="Compass" />
+            android:title="Compass" />-->
         <!--  <item
               android:id="@+id/nav_tshirt"
               android:icon="@drawable/calendar_clock"
               android:title="Tshirt" />-->
     </group>
 
-    <item android:title="Waqt - Upcoming Feature ">
-        <menu>
+   <!-- <item android:title="New Features Coming Soon">-->
+       <!-- <menu>
 
             <item
                 android:id="@+id/nav_namaz"
@@ -42,7 +42,7 @@
 
 
 
-            <!--
+            &lt;!&ndash;
 
                         <item
                             android:id="@+id/nav_send"
@@ -50,10 +50,10 @@
                             android:title="Send Alerts" />
 
 
-            -->
+            &ndash;&gt;
 
 
         </menu>
-    </item>
+-->   <!-- </item>-->
 
 </menu>

@@ -110,7 +110,7 @@ public class Ramzan extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_namaz) {
+      /*  if (id == R.id.nav_namaz) {
 //            Intent intent = new Intent(Ramzan.this, NamazActivity.class);
 //            startActivity(intent);
             Snackbar snackbar =
@@ -126,11 +126,11 @@ public class Ramzan extends AppCompatActivity
 
             // Handle the camera action
         }
-        /*if (id == R.id.nav_compass) {
+        *//*if (id == R.id.nav_compass) {
             Intent intent = new Intent(Ramzan.this, Compass.class);
             startActivity(intent);
 
-        }*/
+        }*//*
         if (id == R.id.nav_mosque) {
             //Intent intent = new Intent(EventActivity.this, MosqueActivity.class);
             //startActivity(intent);
@@ -161,7 +161,7 @@ public class Ramzan extends AppCompatActivity
             //Intent intent = new Intent(EventActivity.this, Calender.class);
             //startActivity(intent);
 
-        }
+        }*/
         if (id == R.id.nav_ramzan) {
             Intent intent = new Intent(Ramzan.this, Ramzan.class);
             startActivity(intent);

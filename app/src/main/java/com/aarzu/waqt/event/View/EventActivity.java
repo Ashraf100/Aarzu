@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,13 +53,13 @@ public class EventActivity extends AppCompatActivity
         implements
         NavigationView.OnNavigationItemSelectedListener, EventView {
 
+    private ShareActionProvider mShareActionProvider;
+
     @BindView(R.id.card_recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     CustomCalendarView customCalendarView;
-   /* @BindView (android.support.design.R.id.snackbar_text)
-    TextView onSackText;*/
 
     private EventDataAdapter eventDataAdapter;
     private ConnectionDetector connectionDetector;
@@ -85,14 +86,14 @@ public class EventActivity extends AppCompatActivity
         intView();
         //  snackbar.dismiss();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -148,7 +149,6 @@ public class EventActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-
         if (connectionDetector.isConnected()) {
             Snackbar snackbar =
                     make(drawerLayout, "Loading Data!!", Snackbar.LENGTH_LONG);
@@ -211,9 +211,10 @@ public class EventActivity extends AppCompatActivity
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
-            Intent intent = new Intent(this, Ramzan.class);
-            startActivity(intent);
+            Intent i = new Intent(this, Ramzan.class);
+            startActivity(i);
             finish();
+
             return true;
         }
 
@@ -227,7 +228,7 @@ public class EventActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_namaz) {
+        /*if (id == R.id.nav_namaz) {
             //Intent intent = new Intent(EventActivity.this, NamazActivity.class);
             //startActivity(intent);
             Snackbar snackbar =
@@ -271,7 +272,7 @@ public class EventActivity extends AppCompatActivity
             //Intent intent = new Intent(EventActivity.this, Calender.class);
             //startActivity(intent);
 
-        } else if (id == R.id.nav_ramzan) {
+        } else*/ if (id == R.id.nav_ramzan) {
             Intent intent = new Intent(EventActivity.this, Ramzan.class);
             startActivity(intent);
 

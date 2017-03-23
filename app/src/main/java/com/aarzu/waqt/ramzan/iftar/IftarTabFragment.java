@@ -2,6 +2,7 @@ package com.aarzu.waqt.ramzan.iftar;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -24,8 +25,12 @@ import com.aarzu.waqt.splash.ConnectionDetector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,17 +45,17 @@ import static android.support.design.widget.Snackbar.make;
 public class IftarTabFragment extends Fragment {
     private IftarDataAdapter adapter;
     private ConnectionDetector connectionDetector;
-  //  private IftarView iftarView;
+    //  private IftarView iftarView;
     private ArrayList<AllTask> iftarData;
     ProgressDialog dialog;
     private RelativeLayout relativeLayout;
 
-    /*@BindView(R.id.iftar_card_recycler_view)
-    RecyclerView recyclerView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;*/
+    //@BindView(R.id.iftar_card_recycler_view)
+    //RecyclerView recyclerView;
+//    @BindView(R.id.drawer_layout)
+//    TextView iday;
     ProgressDialog progressDialog;
-  //  Realm realm;
+    //  Realm realm;
     View v;
 
     @Override
@@ -58,6 +63,8 @@ public class IftarTabFragment extends Fragment {
         v = inflater.inflate(R.layout.iftartab_fragment, container, false);
         connectionDetector = new ConnectionDetector(getActivity());
         relativeLayout = (RelativeLayout) v.findViewById(R.id.iftar_relative);
+      //  ButterKnife.bind(this,v);
+       // Typeface typeface = Typeface.createFromAsset()
         //Realm.init(this.getActivity());
         //realm = Realm.getDefaultInstance();
         //intView();
@@ -66,12 +73,6 @@ public class IftarTabFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);*/
         // loadIftarJson();
-       /* AlertDialog.Builder builder =
-                new AlertDialog.Builder(this.getActivity(), R.style.MyDialogTheme);
-
-        final AlertDialog dialog = builder.create();
-// display dialog
-        dialog.show();*/
 
 
         return v;
@@ -111,6 +112,9 @@ public class IftarTabFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
         if (connectionDetector.isConnected()) {
             // Toast.makeText(IftarTabFragment.this.getActivity(), "Connected", Toast.LENGTH_SHORT).show();
 
@@ -124,6 +128,8 @@ public class IftarTabFragment extends Fragment {
             textView.setTextColor(Color.WHITE);
             snackbar.show();
             progressDialog = ProgressDialog.show(IftarTabFragment.this.getActivity(), "Loading Data...", null);
+
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://waqt.000webhostapp.com")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -155,7 +161,6 @@ public class IftarTabFragment extends Fragment {
                     Log.d("Error", t.getMessage());
                 }
             });
-
 
 
         } else {
