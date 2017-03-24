@@ -39,7 +39,7 @@ public class Ramzan extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Ramzan");
-//        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -62,6 +62,8 @@ public class Ramzan extends AppCompatActivity
         final PageAdapter adapter = new PageAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -171,7 +173,7 @@ public class Ramzan extends AppCompatActivity
         if (id == R.id.nav_event) {
             Intent intent = new Intent(Ramzan.this, EventActivity.class);
             startActivity(intent);
-            // finish();
+             finish();
 /*
 
         } else if (id == R.id.nav_tshirt) {

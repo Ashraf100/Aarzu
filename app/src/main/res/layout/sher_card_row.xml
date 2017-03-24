@@ -23,9 +23,7 @@
             android:textSize="18dp">
 
         </TextView>
-        <!--
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-        -->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,6 +39,13 @@
                 android:textColor="#000000"
                 android:typeface="serif"
                 tools:text="Sunday" />
+            <View
+                android:layout_width="6dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/sher_date"
@@ -51,6 +56,13 @@
                 android:typeface="serif"
                 android:textColor="#000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <View
+                android:layout_width="6dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/sher_time"

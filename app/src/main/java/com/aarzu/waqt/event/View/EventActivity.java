@@ -272,12 +272,15 @@ public class EventActivity extends AppCompatActivity
             //Intent intent = new Intent(EventActivity.this, Calender.class);
             //startActivity(intent);
 
-        } else*/ if (id == R.id.nav_ramzan) {
+        } else*/
+
+        if (id == R.id.nav_ramzan) {
             Intent intent = new Intent(EventActivity.this, Ramzan.class);
             startActivity(intent);
+            finish();
 
 
-        } else if (id == R.id.nav_event) {
+        }  if (id == R.id.nav_event) {
             Intent intent = new Intent(EventActivity.this, EventActivity.class);
             startActivity(intent);
 /*
