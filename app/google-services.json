@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "791964156194",
+    "firebase_url": "https://waqt-bdfbe.firebaseio.com",
+    "project_id": "waqt-bdfbe",
+    "storage_bucket": "waqt-bdfbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791964156194:android:24a46d62d168c4e5",
+        "android_client_info": {
+          "package_name": "com.aarzu.waqt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791964156194-hl7jqvalv9upnt0igunkcnkqg8uc90j4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0lrPtR7Ig5w3sNpC6225IDkU5tBos8x4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

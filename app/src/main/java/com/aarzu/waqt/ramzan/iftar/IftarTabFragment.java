@@ -22,6 +22,10 @@ import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.model.JSONResponse;
 import com.aarzu.waqt.model.RequestInterface;
 import com.aarzu.waqt.splash.ConnectionDetector;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +42,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.support.design.widget.Snackbar.make;
+import static com.aarzu.waqt.R.id.adView;
+import static com.aarzu.waqt.R.id.iftaradView;
 
 /**
  * Created by Drac Android on 3/6/2017.
@@ -49,6 +55,8 @@ public class IftarTabFragment extends Fragment {
     private ArrayList<AllTask> iftarData;
     ProgressDialog dialog;
     private RelativeLayout relativeLayout;
+    InterstitialAd interstitialAd;
+    private AdView adView;
 
     //@BindView(R.id.iftar_card_recycler_view)
     //RecyclerView recyclerView;
@@ -73,11 +81,59 @@ public class IftarTabFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);*/
         // loadIftarJson();
+        adView = (AdView) v.findViewById(iftaradView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+
+        interstitialAd = new InterstitialAd(getActivity());
+        interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+
+        interstitialAd.loadAd(adRequest);
+
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                displayInterstitial();
+            }
+        });
 
 
         return v;
     }
+    private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
 
+    @Override
+    public void onPause() {
+        if (adView != null){
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (adView != null){
+            adView.resume();
+        }
+        super.onResume();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null){
+            adView.destroy();
+        }
+        super.onDestroy();
+    }
     /*private void saveData() {
 
         realm.executeTransactionAsync(new Realm.Transaction() {

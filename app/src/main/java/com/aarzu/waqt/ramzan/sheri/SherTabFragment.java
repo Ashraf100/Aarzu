@@ -20,7 +20,13 @@ import com.aarzu.waqt.R;
 import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.model.JSONResponse;
 import com.aarzu.waqt.model.RequestInterface;
+import com.aarzu.waqt.ramzan.xtra.FullScreenAd;
 import com.aarzu.waqt.splash.ConnectionDetector;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,15 +55,42 @@ public class SherTabFragment extends Fragment {
     DrawerLayout drawerLayout;*/
    /* @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;*/
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
+    private String TAG = SherTabFragment.class.getSimpleName();
+    InterstitialAd interstitialAd;
+    private AdView adView;
     View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.shertab_fragment, container, false);
         //ButterKnife.bind(this);
-
+       // MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-4403504358245998~5343283464");
         connectionDetector = new ConnectionDetector(getActivity());
          relativeLayout = (RelativeLayout) v.findViewById(R.id.relative);
+
+         adView = (AdView) v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+
+        interstitialAd = new InterstitialAd(getActivity());
+        interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+        
+        interstitialAd.loadAd(adRequest);
+
+       interstitialAd.setAdListener(new AdListener() {
+           @Override
+           public void onAdLoaded() {
+               super.onAdLoaded();
+               displayInterstitial();
+           }
+       });
+
+
+
+
         //intView();
        /* RecyclerView rv = (RecyclerView) v.findViewById(R.id.iftard_card_recycler_view);
         rv.setHasFixedSize(true);
@@ -69,6 +102,37 @@ public class SherTabFragment extends Fragment {
 
 
         return v;
+    }
+
+    private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (adView != null){
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (adView != null){
+            adView.resume();
+        }
+        super.onResume();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null){
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     @Override

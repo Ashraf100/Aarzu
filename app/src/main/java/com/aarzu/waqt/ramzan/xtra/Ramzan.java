@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.aarzu.waqt.R;
 import com.aarzu.waqt.event.View.EventActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +38,6 @@ public class Ramzan extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ramzan_main);
         ButterKnife.bind(this);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Ramzan");
