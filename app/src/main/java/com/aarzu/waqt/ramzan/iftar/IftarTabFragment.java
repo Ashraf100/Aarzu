@@ -87,7 +87,6 @@ public class IftarTabFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         interstitialAd.loadAd(adRequest);
 
-
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {

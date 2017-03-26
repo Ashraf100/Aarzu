@@ -1,7 +1,9 @@
 package com.aarzu.waqt.event.View;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -73,6 +75,15 @@ public class EventActivity extends AppCompatActivity
     private AdView adView;
     private ProgressDialog progressDialog;
     private Snackbar snackbar;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String Title = "title";
+    public static final String Time = "time";
+    public static final String Date = "date";
+    public static final String Venue = "venue";
+    public static final String Description = "desc";
+
+
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +103,7 @@ public class EventActivity extends AppCompatActivity
 
         connectionDetector = new ConnectionDetector(this);
         intView();
+
         //  snackbar.dismiss();
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -189,6 +201,12 @@ public class EventActivity extends AppCompatActivity
 
             EventPresenter eventPresenter = new EventImplementor(this);
             eventPresenter.loadEventJson();
+//            SharedPreferences.Editor editor = sharedpreferences.edit();
+//            editor.putString(Day, n);
+//            editor.putString(Phone, ph);
+//            editor.putString(Email, e);
+//            editor.commit();
+//            Toast.makeText(MainActivity.this,"Thanks",Toast.LENGTH_LONG).show();
             // snackbar.dismiss();
             // progressDialog.dismiss();
         } else {
@@ -239,8 +257,26 @@ public class EventActivity extends AppCompatActivity
     public void showEventRecyclerView(ArrayList<AllTask> allTasks) {
         eventDataAdapter = new EventDataAdapter(allTasks);
         recyclerView.setAdapter(eventDataAdapter);
+       /* sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        AllTask allTask = new AllTask();
 
-    }
+
+        String tl  = allTask.getTitle().toString();
+        String tm  = allTask.getTime().toString();
+        String dt  = allTask.getDate().toString();
+        String v   = allTask.getVenue().toString();
+        String de   = allTask.getDescription().toString();
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        editor.putString(Title,tl);
+        editor.putString(Date,dt);
+        editor.putString(Time,tm);
+        editor.putString(Venue,v);
+        editor.putString(Description,de);
+        editor.commit();
+        Toast.makeText(EventActivity.this,"Thanks", Toast.LENGTH_LONG).show();
+*/    }
 
     @Override
     public void onBackPressed() {
