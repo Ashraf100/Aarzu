@@ -175,7 +175,7 @@ public class Ramzan extends AppCompatActivity
         if (id == R.id.nav_event) {
             Intent intent = new Intent(Ramzan.this, EventActivity.class);
             startActivity(intent);
-             finish();
+
 /*
 
         } else if (id == R.id.nav_tshirt) {

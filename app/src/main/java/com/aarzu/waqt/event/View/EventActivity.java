@@ -30,6 +30,10 @@ import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.ramzan.xtra.Ramzan;
 import com.aarzu.waqt.splash.ConnectionDetector;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.stacktips.view.CalendarListener;
 import com.stacktips.view.CustomCalendarView;
 
@@ -43,6 +47,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.support.design.widget.Snackbar.make;
+import static com.aarzu.waqt.R.id.event_adView;
+//import static com.aarzu.waqt.R.id.iftaradView;
 
 
 /**
@@ -63,6 +69,8 @@ public class EventActivity extends AppCompatActivity
 
     private EventDataAdapter eventDataAdapter;
     private ConnectionDetector connectionDetector;
+    InterstitialAd interstitialAd;
+    private AdView adView;
     private ProgressDialog progressDialog;
     private Snackbar snackbar;
 
@@ -142,6 +150,25 @@ public class EventActivity extends AppCompatActivity
             customCalendarView.setCustomTypeface(typeface);
             customCalendarView.refreshCalendar(currentCalendar);
         }*/
+        adView = (AdView) findViewById(event_adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+
+        interstitialAd.loadAd(adRequest);
+
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                displayInterstitial();
+            }
+        });
 
     }
 
@@ -178,7 +205,36 @@ public class EventActivity extends AppCompatActivity
         }
 
     }
+    private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
 
+    @Override
+    public void onPause() {
+        if (adView != null){
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (adView != null){
+            adView.resume();
+        }
+        super.onResume();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null){
+            adView.destroy();
+        }
+        super.onDestroy();
+    }
     @Override
     public void showEventRecyclerView(ArrayList<AllTask> allTasks) {
         eventDataAdapter = new EventDataAdapter(allTasks);
