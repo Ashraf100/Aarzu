@@ -18,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.ramzan.xtra.Ramzan;
 import com.aarzu.waqt.splash.ConnectionDetector;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -47,6 +49,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 import static android.support.design.widget.Snackbar.make;
 import static com.aarzu.waqt.R.id.event_adView;
@@ -82,7 +86,7 @@ public class EventActivity extends AppCompatActivity
     public static final String Venue = "venue";
     public static final String Description = "desc";
 
-
+    Context context;
     SharedPreferences sharedpreferences;
 
     @Override
@@ -92,8 +96,19 @@ public class EventActivity extends AppCompatActivity
         ButterKnife.bind(this);
         //EventActivity.this.getSupportActionBar().setTitle("Upcoming Event");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Upcoming Event");
+       toolbar.setTitle("Upcoming Event");
         setSupportActionBar(toolbar);
+
+        //BottomSheetLayout bottomSheet = (BottomSheetLayout) findViewById(R.id.bottomsheet);
+      //  bottomSheet.showWithSheetView(LayoutInflater.from(context).inflate(R.layout.activity_main, bottomSheet, false));
+        //Config Realm for the application
+//        Realm.init(this);
+//        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+//                .name("waqtdb.realm")
+//                .build();
+//
+//        Realm.setDefaultConfiguration(realmConfiguration);
+
         // add back arrow to toolbar
        /* if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
