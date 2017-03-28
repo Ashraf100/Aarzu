@@ -1,9 +1,7 @@
 package com.aarzu.waqt.event.View;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +30,6 @@ import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.ramzan.xtra.Ramzan;
 import com.aarzu.waqt.splash.ConnectionDetector;
 
-import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -49,12 +45,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 import static android.support.design.widget.Snackbar.make;
 import static com.aarzu.waqt.R.id.event_adView;
-//import static com.aarzu.waqt.R.id.iftaradView;
 
 
 /**
@@ -75,19 +68,10 @@ public class EventActivity extends AppCompatActivity
 
     private EventDataAdapter eventDataAdapter;
     private ConnectionDetector connectionDetector;
-    InterstitialAd interstitialAd;
-    private AdView adView;
     private ProgressDialog progressDialog;
     private Snackbar snackbar;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String Title = "title";
-    public static final String Time = "time";
-    public static final String Date = "date";
-    public static final String Venue = "venue";
-    public static final String Description = "desc";
-
-    Context context;
-    SharedPreferences sharedpreferences;
+    private AdView adView;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,19 +80,8 @@ public class EventActivity extends AppCompatActivity
         ButterKnife.bind(this);
         //EventActivity.this.getSupportActionBar().setTitle("Upcoming Event");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       toolbar.setTitle("Upcoming Event");
+        toolbar.setTitle("Upcoming Event");
         setSupportActionBar(toolbar);
-
-        //BottomSheetLayout bottomSheet = (BottomSheetLayout) findViewById(R.id.bottomsheet);
-      //  bottomSheet.showWithSheetView(LayoutInflater.from(context).inflate(R.layout.activity_main, bottomSheet, false));
-        //Config Realm for the application
-//        Realm.init(this);
-//        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-//                .name("waqtdb.realm")
-//                .build();
-//
-//        Realm.setDefaultConfiguration(realmConfiguration);
-
         // add back arrow to toolbar
        /* if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -118,6 +91,18 @@ public class EventActivity extends AppCompatActivity
 
         connectionDetector = new ConnectionDetector(this);
         intView();
+
+        adView = (AdView) findViewById(event_adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+
+
+
+
+
 
         //  snackbar.dismiss();
 
@@ -177,11 +162,6 @@ public class EventActivity extends AppCompatActivity
             customCalendarView.setCustomTypeface(typeface);
             customCalendarView.refreshCalendar(currentCalendar);
         }*/
-        adView = (AdView) findViewById(event_adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        adView.loadAd(adRequest);
 
 
         interstitialAd = new InterstitialAd(this);
@@ -199,6 +179,14 @@ public class EventActivity extends AppCompatActivity
 
     }
 
+
+    private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
+
+
     public void intView() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -214,14 +202,9 @@ public class EventActivity extends AppCompatActivity
             textView.setTextColor(Color.WHITE);
             snackbar.show();
 
+
             EventPresenter eventPresenter = new EventImplementor(this);
             eventPresenter.loadEventJson();
-//            SharedPreferences.Editor editor = sharedpreferences.edit();
-//            editor.putString(Day, n);
-//            editor.putString(Phone, ph);
-//            editor.putString(Email, e);
-//            editor.commit();
-//            Toast.makeText(MainActivity.this,"Thanks",Toast.LENGTH_LONG).show();
             // snackbar.dismiss();
             // progressDialog.dismiss();
         } else {
@@ -238,60 +221,13 @@ public class EventActivity extends AppCompatActivity
         }
 
     }
-    private void displayInterstitial() {
-        if (interstitialAd.isLoaded()){
-            interstitialAd.show();
-        }
-    }
 
-    @Override
-    public void onPause() {
-        if (adView != null){
-            adView.pause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        if (adView != null){
-            adView.resume();
-        }
-        super.onResume();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        if (adView != null){
-            adView.destroy();
-        }
-        super.onDestroy();
-    }
     @Override
     public void showEventRecyclerView(ArrayList<AllTask> allTasks) {
         eventDataAdapter = new EventDataAdapter(allTasks);
         recyclerView.setAdapter(eventDataAdapter);
-       /* sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        AllTask allTask = new AllTask();
 
-
-        String tl  = allTask.getTitle().toString();
-        String tm  = allTask.getTime().toString();
-        String dt  = allTask.getDate().toString();
-        String v   = allTask.getVenue().toString();
-        String de   = allTask.getDescription().toString();
-
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-
-        editor.putString(Title,tl);
-        editor.putString(Date,dt);
-        editor.putString(Time,tm);
-        editor.putString(Venue,v);
-        editor.putString(Description,de);
-        editor.commit();
-        Toast.makeText(EventActivity.this,"Thanks", Toast.LENGTH_LONG).show();
-*/    }
+    }
 
     @Override
     public void onBackPressed() {
@@ -405,3 +341,56 @@ public class EventActivity extends AppCompatActivity
 
     }
 }
+
+/*
+ adView = (AdView) findViewById(event_adView);
+         AdRequest adRequest = new AdRequest.Builder()
+         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+         .build();
+         adView.loadAd(adRequest);
+
+
+         interstitialAd = new InterstitialAd(this);
+         interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+
+         interstitialAd.loadAd(adRequest);
+
+         interstitialAd.setAdListener(new AdListener() {
+@Override
+public void onAdLoaded() {
+        super.onAdLoaded();
+        displayInterstitial();
+        }
+        });
+
+        }
+private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+        interstitialAd.show();
+        }
+        }
+
+@Override
+public void onPause() {
+        if (adView != null){
+        adView.pause();
+        }
+        super.onPause();
+        }
+
+@Override
+public void onResume() {
+        if (adView != null){
+        adView.resume();
+        }
+        super.onResume();
+
+        }
+
+@Override
+public void onDestroy() {
+        if (adView != null){
+        adView.destroy();
+        }
+        super.onDestroy();
+        }*/
