@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_above="@+id/adView" />
 
     <TextClock
         android:id="@+id/textClock"
@@ -41,12 +41,13 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_home_footer">
+        ads:adUnitId="@string/waqt_banner">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
