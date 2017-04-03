@@ -30,6 +30,10 @@ import com.aarzu.waqt.model.AllTask;
 import com.aarzu.waqt.ramzan.xtra.Ramzan;
 import com.aarzu.waqt.splash.ConnectionDetector;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.stacktips.view.CalendarListener;
 import com.stacktips.view.CustomCalendarView;
 
@@ -43,6 +47,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.support.design.widget.Snackbar.make;
+import static com.aarzu.waqt.R.id.event_adView;
 
 
 /**
@@ -65,6 +70,8 @@ public class EventActivity extends AppCompatActivity
     private ConnectionDetector connectionDetector;
     private ProgressDialog progressDialog;
     private Snackbar snackbar;
+    private AdView adView;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +91,19 @@ public class EventActivity extends AppCompatActivity
 
         connectionDetector = new ConnectionDetector(this);
         intView();
+
+        adView = (AdView) findViewById(event_adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+
+
+
+
+
+
         //  snackbar.dismiss();
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -143,7 +163,29 @@ public class EventActivity extends AppCompatActivity
             customCalendarView.refreshCalendar(currentCalendar);
         }*/
 
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+
+        interstitialAd.loadAd(adRequest);
+
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                displayInterstitial();
+            }
+        });
+
     }
+
+
+    private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
+
 
     public void intView() {
         recyclerView.setHasFixedSize(true);
@@ -159,6 +201,7 @@ public class EventActivity extends AppCompatActivity
                     snackbarView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             snackbar.show();
+
 
             EventPresenter eventPresenter = new EventImplementor(this);
             eventPresenter.loadEventJson();
@@ -298,3 +341,56 @@ public class EventActivity extends AppCompatActivity
 
     }
 }
+
+/*
+ adView = (AdView) findViewById(event_adView);
+         AdRequest adRequest = new AdRequest.Builder()
+         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+         .build();
+         adView.loadAd(adRequest);
+
+
+         interstitialAd = new InterstitialAd(this);
+         interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+
+         interstitialAd.loadAd(adRequest);
+
+         interstitialAd.setAdListener(new AdListener() {
+@Override
+public void onAdLoaded() {
+        super.onAdLoaded();
+        displayInterstitial();
+        }
+        });
+
+        }
+private void displayInterstitial() {
+        if (interstitialAd.isLoaded()){
+        interstitialAd.show();
+        }
+        }
+
+@Override
+public void onPause() {
+        if (adView != null){
+        adView.pause();
+        }
+        super.onPause();
+        }
+
+@Override
+public void onResume() {
+        if (adView != null){
+        adView.resume();
+        }
+        super.onResume();
+
+        }
+
+@Override
+public void onDestroy() {
+        if (adView != null){
+        adView.destroy();
+        }
+        super.onDestroy();
+        }*/

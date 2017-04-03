@@ -43,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.support.design.widget.Snackbar.make;
 import static com.aarzu.waqt.R.id.adView;
-import static com.aarzu.waqt.R.id.iftaradView;
+//import static com.aarzu.waqt.R.id.iftaradView;
 
 /**
  * Created by Drac Android on 3/6/2017.
@@ -81,16 +81,10 @@ public class IftarTabFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);*/
         // loadIftarJson();
-        adView = (AdView) v.findViewById(iftaradView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        adView.loadAd(adRequest);
-
-
         interstitialAd = new InterstitialAd(getActivity());
-        interstitialAd.setAdUnitId(getString(R.string.banner_home_footer));
+        interstitialAd.setAdUnitId(getString(R.string.aarzu_full_screen));
 
+        AdRequest adRequest = new AdRequest.Builder().build();
         interstitialAd.loadAd(adRequest);
 
         interstitialAd.setAdListener(new AdListener() {

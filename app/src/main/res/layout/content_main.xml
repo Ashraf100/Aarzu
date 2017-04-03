@@ -5,6 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.aarzu.waqt.event.View.EventActivity"
     tools:showIn="@layout/app_bar_main">
@@ -29,7 +30,18 @@ android:layout_marginLeft="10dp"
         android:layout_height="330dp"
         android:background="#ffff"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" >
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/event_adView"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_home_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"></com.google.android.gms.ads.AdView>
+    </com.stacktips.view.CustomCalendarView>
 
     <!--app:calendarBackgroundColor="@color/off_white"
     app:calendarTitleTextColor="@color/black"
@@ -60,6 +72,5 @@ android:layout_marginLeft="10dp"
         android:text="Upcoming Event"
         android:layout_below="@+id/calendarView"
         android:layout_alignParentEnd="true" />
-
 
 </RelativeLayout>
